@@ -1,4 +1,5 @@
 import * as THREE from 'three'
+import { Vector3 } from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import Experience from './Experience'
 
@@ -10,9 +11,15 @@ export default class Camera
         this.sizes = this.experience.sizes
         this.scene = this.experience.scene
         this.canvas = this.experience.canvas
+        this.debug = this.experience.debug
+
+        if(this.debug.active)
+        {
+            this.debugFolder = this.debug.ui.addFolder('Camera')
+        }
 
         this.setInstance()
-        this.setOrbitControls()
+        // this.setOrbitControls()
     }
 
     setInstance()
@@ -23,8 +30,27 @@ export default class Camera
             0.1,
             100
         )
-        this.instance.position.set(6, 4, 8)
+        this.instance.position.set(5, 14, 12)
         this.scene.add(this.instance)
+
+        if(this.debug.active)
+        {
+            this.debugFolder
+                .add(this.instance.position, 'x')
+                .min(-5)
+                .max(5)
+                .step(0.001)
+            this.debugFolder
+                .add(this.instance.position, 'y')
+                .min(-20)
+                .max(20)
+                .step(0.001)
+            this.debugFolder
+                .add(this.instance.position, 'z')
+                .min(-20)
+                .max(20)
+                .step(0.001)
+        }
     }
 
     setOrbitControls()
@@ -41,6 +67,8 @@ export default class Camera
 
     update()
     {
-        this.controls.update()
+        // this.controls.update()
+        // this.instance.lookAt(new THREE.Vector3(0, 10, 0))
+        this.instance.lookAt(new THREE.Vector3(0, 9, 0))
     }
 }
