@@ -7,6 +7,7 @@ import Camera from './Camera'
 import Renderer from './Renderer'
 import sources from './sources'
 import World from './World/World'
+import ScrollAnimations from './ScrollAnimations'
 
 let instance = null
 
@@ -36,6 +37,7 @@ export default class Experience
         this.camera = new Camera()
         this.renderer = new Renderer()
         this.world = new World()
+        this.cameraAnimations = new ScrollAnimations()
 
         // Sizes resize event
         this.sizes.on('resize', () =>
